@@ -58,7 +58,7 @@ public abstract class Presenter {
 		frame.add(centerComponent, BorderLayout.CENTER);
 		// show frame	
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setVisible(true);
 	}
 
@@ -69,5 +69,9 @@ public abstract class Presenter {
 
 	public JFrame getFrame() {
 		return frame;
+	}
+
+	public TextField getText() {
+		return txt;
 	}
 }
