@@ -23,7 +23,6 @@ public abstract class Presenter {
 
 	public Presenter() {
 		frame = new JFrame();
-		frame.setBounds(0, 0, 1200, 800);
 		// setup layout manager for frame
 		frame.setLayout(new BorderLayout());
 
@@ -58,7 +57,7 @@ public abstract class Presenter {
 		frame.add(centerComponent, BorderLayout.CENTER);
 		// show frame	
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setVisible(true);
 	}
 
