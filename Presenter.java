@@ -23,6 +23,7 @@ public abstract class Presenter {
 
 	public Presenter() {
 		frame = new JFrame();
+		frame.setBounds(0, 0, 830, 700);
 		// setup layout manager for frame
 		frame.setLayout(new BorderLayout());
 
