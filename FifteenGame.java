@@ -3,18 +3,46 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 import javax.swing.AbstractAction;
-import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
+import javax.swing.JComponent;
 
 public class FifteenGame extends Presenter {
     private BlockPanel pan;
     private PicComp winComp;
+    private boolean gameOver = false;
 
     public FifteenGame() {
         createWinComp();
         showText("Press a button to start the game");
 
-        pan.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "doWest");
+        JRootPane rootPane = getFrame().getRootPane();
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "doWest");
+        rootPane.getActionMap().put("doWest",
+        new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {westButtonPressed();}
+        });
+
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "doEast");
+        rootPane.getActionMap().put("doEast",
+        new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {eastButtonPressed();}
+        });
+
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "doNorth");
+        rootPane.getActionMap().put("doNorth",
+        new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {northButtonPressed();}
+        });
+
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "doSouth");
+        rootPane.getActionMap().put("doSouth",
+        new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {southButtonPressed();}
+        });
+
+        /*pan.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "doWest");
         pan.getActionMap().put("doWest",
         new AbstractAction() {
             public void actionPerformed(ActionEvent e) {westButtonPressed();}
@@ -36,7 +64,9 @@ public class FifteenGame extends Presenter {
         pan.getActionMap().put("doSouth",
         new AbstractAction() {
             public void actionPerformed(ActionEvent e) {southButtonPressed();}
-        });
+            
+        });*/
+
     }
 
     public BlockPanel createCenterComponent() {
@@ -45,13 +75,11 @@ public class FifteenGame extends Presenter {
     }
 
     public void createWinComp() {
-        File[] pics = new File("WinImages").listFiles();
-        int index = (int)(Math.random()*pics.length);
-        winComp = new PicComp(pics[index]);
+        winComp = new PicComp(new File("WinImages/Win.png"));
     }
 
     public void eastButtonPressed() {
-        if (pan.getHole().w != null) {
+        if (pan.getHole().w != null && !gameOver) {
             showText(pan.getHole().w.i + " moved EAST");
             pan.switchSpot(pan.getHole(), pan.getHole().w);
             calculateWin(false);
@@ -59,7 +87,7 @@ public class FifteenGame extends Presenter {
 	}
 
 	public void westButtonPressed() {
-        if (pan.getHole().e != null) {
+        if (pan.getHole().e != null && !gameOver) {
             showText(pan.getHole().e.i + " moved WEST");
             pan.switchSpot(pan.getHole(), pan.getHole().e);
             calculateWin(false);
@@ -67,7 +95,7 @@ public class FifteenGame extends Presenter {
 	}
 
 	public void southButtonPressed() {
-        if (pan.getHole().n != null) {
+        if (pan.getHole().n != null && !gameOver) {
             showText(pan.getHole().n.i + " moved SOUTH");
             pan.switchSpot(pan.getHole(), pan.getHole().n);
             calculateWin(false);
@@ -75,10 +103,21 @@ public class FifteenGame extends Presenter {
 	}
 
 	public void northButtonPressed() {
-        if (pan.getHole().s != null) {
+        if (pan.getHole().s != null && !gameOver) {
             showText(pan.getHole().s.i + " moved NORTH");
             pan.switchSpot(pan.getHole(), pan.getHole().s);
             calculateWin(false);
+            return;
+        }
+
+        if (gameOver) {
+            gameOver = false;
+            pan = new BlockPanel();
+            getFrame().remove(winComp);
+            getFrame().add(pan, BorderLayout.CENTER);
+            getFrame().setExtendedState(JFrame.NORMAL);    
+            getFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
+            showText("Press a button to start the game");
         }
 	}
 
@@ -91,14 +130,14 @@ public class FifteenGame extends Presenter {
             }
         }
         if (win || autoWin) {
-            showText("You win!");
+            gameOver = true;
+            showText("You win! Press 'North' to begin a new game.");
             getFrame().remove(pan);
             getFrame().add(winComp, BorderLayout.CENTER);
-            getFrame().update(getFrame().getGraphics());
+            //rad 139-140 krävs för att framen ska uppdateras
+            getFrame().setExtendedState(JFrame.NORMAL);    
+            getFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
-
-
-
     }
 
     public static void main(String[] args) {
