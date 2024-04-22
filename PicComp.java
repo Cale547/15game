@@ -14,12 +14,12 @@ public class PicComp extends JComponent {
 
     public PicComp(File f) {
         try{img = ImageIO.read(f);}
-        catch (IOException e){System.out.println("Error");}
+        catch (IOException e){System.out.println("Error creating image");}
     }
 
     public void setImage(File f) {
         try{img = ImageIO.read(f);}
-        catch (IOException e){System.out.println("Error");}
+        catch (IOException e){System.out.println("Error setting image");}
     }
 
     public void paintComponent(Graphics g) {
