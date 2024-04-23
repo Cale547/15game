@@ -5,8 +5,8 @@ import javax.swing.JPanel;
 public class BlockPanel extends JPanel {
     Block[] b = new Block[16];
     int hPos;
-    String folder = "15ImagesMARIO/";
-    String extension = ".jpg";
+    String folder = "15ImagesNUMBERS/";
+    String extension = ".png";
 
 
     public BlockPanel() {
