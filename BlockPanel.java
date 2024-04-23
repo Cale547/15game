@@ -1,13 +1,13 @@
 import java.awt.GridLayout;
 import java.io.File;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class BlockPanel extends JPanel {
     Block[] b = new Block[16];
     int hPos;
+    String folder = "15ImagesMARIO/";
+    String extension = ".jpg";
+
 
     public BlockPanel() {
         setLayout(new GridLayout(4,4));        
@@ -21,7 +21,7 @@ public class BlockPanel extends JPanel {
 
         //Add all blocks to the centercomponent
         for (int i = 0; i < 16; i++) {
-            String path = "15Images/" + nr[i] + ".png";
+            String path = folder + nr[i] + extension;
             b[i] = new Block(nr[i], i, new PicComp(new File(path)));
             if (nr[i] == 16) {
                 hPos = i;
@@ -56,8 +56,8 @@ public class BlockPanel extends JPanel {
         return b[hPos];
     }
     public void switchSpot(Block A, Block B) {
-        A.num.setImage(new File("15Images/" + B.i + ".png"));
-        B.num.setImage(new File("15Images/" + A.i + ".png"));
+        A.num.setImage(new File(folder + B.i + extension));
+        B.num.setImage(new File(folder + A.i + extension));
         A.num.repaint();
         B.num.repaint();
 
