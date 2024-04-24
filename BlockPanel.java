@@ -12,12 +12,6 @@ public class BlockPanel extends JPanel {
     public BlockPanel() {
         setLayout(new GridLayout(4,4));        
         int[] nr = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-        for (int i = 15; i > 0; i--) {
-            int swap = (int)(Math.random()*i);
-            int temp = nr[i];
-            nr[i] = nr[swap];
-            nr[swap] = temp;
-        }
 
         //Add all blocks to the centercomponent
         for (int i = 0; i < 16; i++) {
@@ -28,6 +22,8 @@ public class BlockPanel extends JPanel {
             }
             add(b[i].num);
         }
+
+        shuffle();
 
         //Set neighbors of all blocks
         b[0].setNeighbors(null, b[4], null, b[1]);
@@ -49,6 +45,23 @@ public class BlockPanel extends JPanel {
         b[13].setNeighbors(b[9], null, b[12], b[14]);
         b[14].setNeighbors(b[10], null, b[13], b[15]);
         b[15].setNeighbors(b[11], null, b[14], null);
+
+    }
+
+    public void shuffle() {
+        for (int i = 0; i < 100; i++) {
+            int rand = (int)(Math.random()*15) + 1;
+            if (rand == 15) {
+                switchSpot(b[rand], b[rand-1]);
+            } else {
+                switchSpot(b[rand], b[rand+1]);
+            }
+        }
+        
+        if (hPos % 2 != 0) {
+            switchSpot(b[6], b[7]);
+            System.out.println("Final fix!");
+        }
 
     }
 
