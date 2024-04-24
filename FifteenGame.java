@@ -14,7 +14,7 @@ public class FifteenGame extends Presenter {
     private boolean gameOver = false;
 
     public FifteenGame() {
-        createWinComp();
+        createWinComp(pan.folder + "result" + pan.extension);
         showText("Press a button to start the game");
 
         JRootPane rootPane = getFrame().getRootPane();
@@ -41,32 +41,6 @@ public class FifteenGame extends Presenter {
         new AbstractAction() {
             public void actionPerformed(ActionEvent e) {southButtonPressed();}
         });
-
-        /*pan.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "doWest");
-        pan.getActionMap().put("doWest",
-        new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {westButtonPressed();}
-        });
-
-        pan.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "doEast");
-        pan.getActionMap().put("doEast",
-        new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {eastButtonPressed();}
-        });
-
-        pan.getInputMap().put(KeyStroke.getKeyStroke("UP"), "doNorth");
-        pan.getActionMap().put("doNorth",
-        new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {northButtonPressed();}
-        });
-
-        pan.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "doSouth");
-        pan.getActionMap().put("doSouth",
-        new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {southButtonPressed();}
-            
-        });*/
-
     }
 
     public BlockPanel createCenterComponent() {
@@ -74,8 +48,8 @@ public class FifteenGame extends Presenter {
         return pan;
     }
 
-    public void createWinComp() {
-        winComp = new PicComp(new File("WinImages/Win.png"));
+    public void createWinComp(String filePath) {
+        winComp = new PicComp(new File(filePath));
     }
 
     public void eastButtonPressed() {
@@ -115,8 +89,8 @@ public class FifteenGame extends Presenter {
             pan = new BlockPanel();
             getFrame().remove(winComp);
             getFrame().add(pan, BorderLayout.CENTER);
-            getFrame().setExtendedState(JFrame.NORMAL);    
             getFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
+            getFrame().setExtendedState(JFrame.NORMAL);
             showText("Press a button to start the game");
         }
 	}
@@ -135,8 +109,9 @@ public class FifteenGame extends Presenter {
             getFrame().remove(pan);
             getFrame().add(winComp, BorderLayout.CENTER);
             //rad 139-140 krävs för att framen ska uppdateras
-            getFrame().setExtendedState(JFrame.NORMAL);    
             getFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
+            getFrame().setExtendedState(JFrame.NORMAL);    
+            
         }
     }
 
