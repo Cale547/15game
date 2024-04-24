@@ -1,15 +1,21 @@
 import java.awt.GridLayout;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.JPanel;
 
 public class BlockPanel extends JPanel {
     Block[] b = new Block[16];
     int hPos;
-    String folder = "15ImagesNUMBERS/";
-    String extension = ".png";
+    String folder;
+    String extension;
 
+    
+    public BlockPanel(String f, String e) {
+        folder = f;
+        extension = e;
 
-    public BlockPanel() {
         setLayout(new GridLayout(4,4));        
         int[] nr = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
 
@@ -49,20 +55,19 @@ public class BlockPanel extends JPanel {
     }
 
     public void shuffle() {
-        for (int i = 0; i < 100; i++) {
-            int rand = (int)(Math.random()*15) + 1;
-            if (rand == 15) {
-                switchSpot(b[rand], b[rand-1]);
-            } else {
-                switchSpot(b[rand], b[rand+1]);
+        for (int i = 0; i < 200; i++) {
+            int rand1 = 0, rand2 = 0;
+            while (rand1 == rand2) {
+                rand1 = (int)(Math.random()*16);
+                rand2 = (int)(Math.random()*16);
             }
-        }
-        
-        if (hPos % 2 != 0) {
-            switchSpot(b[6], b[7]);
-            System.out.println("Final fix!");
+            switchSpot(b[rand1], b[rand2]);
         }
 
+        ArrayList<Integer> oddPos = new ArrayList<>(Arrays.asList(1,3,4,6,9,11,12,14));
+        if (oddPos.contains(hPos)) {
+            switchSpot(b[6], b[7]);
+        }
     }
 
     public Block getHole() {
