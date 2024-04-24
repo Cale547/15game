@@ -9,26 +9,28 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.JComponent;
 
 public class FifteenGame {
-    JFrame frame;
-	TextField txt = new TextField(20);
-
+    private JFrame frame;
+	private JTextArea txt = new JTextArea(2,28);
+    private int steps;
     private BlockPanel pan;
     private PicComp winComp;
     private boolean gameOver = false;
     private String folder;
     private String extension;
-    private JFrame puzzlemenu;
+    private PuzzleMenu puzzlemenu;
 
-    public FifteenGame(String f, String e, JFrame pm) {
+    public FifteenGame(String f, String e, PuzzleMenu pm) {
         puzzlemenu = pm;
         folder = f;
         extension = e;
+        steps = 0;
 
-        frame = new JFrame();
+        frame = new JFrame("Solve the puzzle!");
 		frame.setBounds(0, 0, 418, 520);
 		// setup layout manager for frame
 		frame.setLayout(new BorderLayout());
@@ -107,46 +109,77 @@ public class FifteenGame {
     }
 
     public void eastButtonPressed() {
-        if (pan.getHole().w != null && !gameOver) {
-            showText(pan.getHole().w.i + " moved EAST");
-            pan.switchSpot(pan.getHole(), pan.getHole().w);
+        if (!gameOver) {
+            if (puzzlemenu.getControls() == PuzzleMenu.MOVENEIGHBORS && pan.getHole().w != null) {
+                pan.switchSpot(pan.getHole(), pan.getHole().w);
+                steps++;
+                showText("Steps: " + steps);
+            } else if (puzzlemenu.getControls() == PuzzleMenu.MOVEHOLE && pan.getHole().e != null) {
+                pan.switchSpot(pan.getHole(), pan.getHole().e);
+                steps++;
+                showText("Steps: " + steps);
+            }
+
             calculateWin(false);
         }
 	}
 
 	public void westButtonPressed() {
-        if (pan.getHole().e != null && !gameOver) {
-            showText(pan.getHole().e.i + " moved WEST");
-            pan.switchSpot(pan.getHole(), pan.getHole().e);
+        if (!gameOver) {
+            if (puzzlemenu.getControls() == PuzzleMenu.MOVENEIGHBORS && pan.getHole().e != null) {
+                pan.switchSpot(pan.getHole(), pan.getHole().e);
+                steps++;
+                showText("Steps: " + steps);
+            } else if (puzzlemenu.getControls() == PuzzleMenu.MOVEHOLE && pan.getHole().w != null) {
+                pan.switchSpot(pan.getHole(), pan.getHole().w);
+                steps++;
+                showText("Steps: " + steps);
+            }
+
             calculateWin(false);
         }
 	}
 
 	public void southButtonPressed() {
-        if (pan.getHole().n != null && !gameOver) {
-            showText(pan.getHole().n.i + " moved SOUTH");
-            pan.switchSpot(pan.getHole(), pan.getHole().n);
+        if (!gameOver) {
+            if (puzzlemenu.getControls() == PuzzleMenu.MOVENEIGHBORS && pan.getHole().n != null) {
+                pan.switchSpot(pan.getHole(), pan.getHole().n);
+                steps++;
+                showText("Steps: " + steps);
+            } else if (puzzlemenu.getControls() == PuzzleMenu.MOVEHOLE && pan.getHole().s != null) {
+                pan.switchSpot(pan.getHole(), pan.getHole().s);
+                steps++;
+                showText("Steps: " + steps);
+            }
+
             calculateWin(false);
-            return;
         }
 
-        if (gameOver) {
+        else {
             gameOver = false;
             this.frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-            puzzlemenu.setState(JFrame.NORMAL);
+            puzzlemenu.getFrame().setState(JFrame.NORMAL);
         }
 	}
 
 	public void northButtonPressed() {
-        if (pan.getHole().s != null && !gameOver) {
-            showText(pan.getHole().s.i + " moved NORTH");
-            pan.switchSpot(pan.getHole(), pan.getHole().s);
+        if (!gameOver) {
+            if (puzzlemenu.getControls() == PuzzleMenu.MOVENEIGHBORS && pan.getHole().s != null) {
+                    pan.switchSpot(pan.getHole(), pan.getHole().s);
+                    steps++;
+                    showText("Steps: " + steps);
+            } else if (puzzlemenu.getControls() == PuzzleMenu.MOVEHOLE && pan.getHole().n != null) {
+                    pan.switchSpot(pan.getHole(), pan.getHole().n);
+                    steps++;
+                    showText("Steps: " + steps);
+            } 
+
             calculateWin(false);
-            return;
         }
 
-        if (gameOver) {
+        else {
             gameOver = false;
+            steps = 0;
             pan = new BlockPanel(folder, extension);
             frame.remove(winComp);
             frame.add(pan, BorderLayout.CENTER);
@@ -166,13 +199,12 @@ public class FifteenGame {
         }
         if (win || autoWin) {
             gameOver = true;
-            showText("You win! Press 'North' to begin a new game. Press 'South' to choose a new puzzle.");
+            showText("You won in " + steps + " steps!\nPress 'North' to begin a new game.\nPress 'South' to choose a new puzzle.");
             frame.remove(pan);
             frame.add(winComp, BorderLayout.CENTER);
             //rad 139-140 krävs för att framen ska uppdateras
             frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
             frame.setExtendedState(JFrame.NORMAL);    
-            
         }
     }
 
@@ -180,9 +212,14 @@ public class FifteenGame {
 		// update the text component
 		txt.setText(text);
 	}
+    
+    public JFrame getFrame() {
+        return frame;
+    }
 
     public static void main(String[] args) {
-        new FifteenGame("15ImagesNUMBERS/", ".jpg", new JFrame());
+        FifteenGame a = new FifteenGame("Puzzles/NUMBERS/", ".jpg", new PuzzleMenu());
+        a.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 }
