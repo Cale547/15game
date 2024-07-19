@@ -1,9 +1,7 @@
 import java.awt.BorderLayout;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
-
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -68,7 +66,6 @@ public class FifteenGame {
 		
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	Not needed when part of PuzzleMenu
 		frame.setVisible(true);
-
         
         createWinComp(f + "result" + e);
         showText("Press a button to start the game");
@@ -108,7 +105,7 @@ public class FifteenGame {
         winComp = new PicComp(new File(filePath));
     }
 
-    public void eastButtonPressed() {
+    public void eastButtonPressed() {   
         if (!gameOver) {
             if (puzzlemenu.getControls() == PuzzleMenu.MOVENEIGHBORS && pan.getHole().w != null) {
                 pan.switchSpot(pan.getHole(), pan.getHole().w);
