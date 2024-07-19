@@ -155,7 +155,8 @@ public class FifteenGame {
         else {
             gameOver = false;
             this.frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-            puzzlemenu.getFrame().setState(JFrame.NORMAL);
+            new PuzzleMenu();
+            //puzzlemenu.getFrame().setState(JFrame.NORMAL);
         }
 	}
 

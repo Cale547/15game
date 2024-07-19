@@ -22,7 +22,7 @@ public class PuzzleMenu {
         city.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/CITY/", ".jpg", PuzzleMenu.this);    
-                frame.setState(JFrame.ICONIFIED); 
+                frame.dispose();
             }
         });
         frame.add(city);
@@ -31,7 +31,7 @@ public class PuzzleMenu {
         mario.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/MARIO/", ".jpg", PuzzleMenu.this);
-                frame.setState(JFrame.ICONIFIED);
+                frame.dispose();
             }
         });
         frame.add(mario);
@@ -40,7 +40,7 @@ public class PuzzleMenu {
         numbers.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/NUMBERS/", ".jpg", PuzzleMenu.this);  
-                frame.setState(JFrame.ICONIFIED);   
+                frame.dispose();
             }
         });
         frame.add(numbers);
@@ -49,7 +49,7 @@ public class PuzzleMenu {
         maiden.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/IRONMAIDEN/", ".jpg", PuzzleMenu.this);  
-                frame.setState(JFrame.ICONIFIED);   
+                frame.dispose();   
             }
         });
         frame.add(maiden);
@@ -58,7 +58,7 @@ public class PuzzleMenu {
         zelda.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/ZELDA/", ".jpg", PuzzleMenu.this);  
-                frame.setState(JFrame.ICONIFIED);   
+                frame.dispose();   
             }
         });
         frame.add(zelda);
@@ -67,7 +67,7 @@ public class PuzzleMenu {
         ow.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/OUTERWILDS/", ".jpg", PuzzleMenu.this);  
-                frame.setState(JFrame.ICONIFIED);   
+                frame.dispose();   
             }
         });
         frame.add(ow);
@@ -76,7 +76,7 @@ public class PuzzleMenu {
         ada.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/ADA/", ".jpg", PuzzleMenu.this);  
-                frame.setState(JFrame.ICONIFIED);   
+                frame.dispose();   
             }
         });
         frame.add(ada);
@@ -85,7 +85,7 @@ public class PuzzleMenu {
         tegnell.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/TEGNELL/", ".jpg", PuzzleMenu.this);  
-                frame.setState(JFrame.ICONIFIED);   
+                frame.dispose();   
             }
         });
         frame.add(tegnell);
@@ -94,7 +94,7 @@ public class PuzzleMenu {
         spider.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/SPIDERVERSE/", ".jpg", PuzzleMenu.this);  
-                frame.setState(JFrame.ICONIFIED);   
+                frame.dispose();   
             }
         });
         frame.add(spider);
@@ -103,7 +103,7 @@ public class PuzzleMenu {
         ingabrudar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/INGABRUDAR/", ".jpg", PuzzleMenu.this);  
-                frame.setState(JFrame.ICONIFIED);   
+                frame.dispose();   
             }
         });
         frame.add(ingabrudar);
@@ -112,7 +112,7 @@ public class PuzzleMenu {
         minecraft.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/MINECRAFT/", ".jpg", PuzzleMenu.this);  
-                frame.setState(JFrame.ICONIFIED);   
+                frame.dispose();   
             }
         });
         frame.add(minecraft);
@@ -121,7 +121,8 @@ public class PuzzleMenu {
         tommy.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FifteenGame("Puzzles/TOMMYWIN/", ".jpg", PuzzleMenu.this);  
-                frame.setState(JFrame.ICONIFIED);   
+                //frame.dispose();
+                frame.dispose();
             }
         });
         frame.add(tommy);
@@ -136,7 +137,7 @@ public class PuzzleMenu {
         settingsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new SettingsMenu(PuzzleMenu.this);
-                frame.setState(JFrame.ICONIFIED);
+                frame.dispose();
             }
         });
         frame.add(settingsButton);
