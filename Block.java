@@ -3,7 +3,6 @@ import javax.swing.JLabel;
 public class Block extends JLabel {
     int i;
     int pos;
-    boolean isHole = i == 16;
     PicComp num;
     Block n;
     Block s;
