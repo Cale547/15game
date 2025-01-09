@@ -99,14 +99,14 @@ public class PuzzleMenu {
         });
         frame.add(spider);
 
-        JButton ingabrudar = new JButton("<html><body>INGA<br>BRUDAR</body></html>");
-        ingabrudar.addActionListener(new ActionListener() {
+        JButton hitman = new JButton("HITMAN");
+        hitman.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new FifteenGame("Puzzles/INGABRUDAR/", ".jpg", PuzzleMenu.this);  
+                new FifteenGame("Puzzles/HITMAN/", ".jpg", PuzzleMenu.this);  
                 frame.dispose();   
             }
         });
-        frame.add(ingabrudar);
+        frame.add(hitman);
 
         JButton minecraft = new JButton("<html><body>MINE-<br>CRAFT</body></html>");
         minecraft.addActionListener(new ActionListener() {
@@ -117,15 +117,15 @@ public class PuzzleMenu {
         });
         frame.add(minecraft);
 
-        JButton tommy = new JButton("TOMMY");
-        tommy.addActionListener(new ActionListener() {
+        JButton rdr = new JButton("<html><body>RED<br>DEAD<br>REDEMPTION</body></html>");
+        rdr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new FifteenGame("Puzzles/TOMMYWIN/", ".jpg", PuzzleMenu.this);  
+                new FifteenGame("Puzzles/RDR/", ".jpg", PuzzleMenu.this);  
                 //frame.dispose();
                 frame.dispose();
             }
         });
-        frame.add(tommy);
+        frame.add(rdr);
         
 
 

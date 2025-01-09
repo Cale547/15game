@@ -64,7 +64,7 @@ public class FifteenGame {
 		frame.add(centerComponent, BorderLayout.CENTER);
 		// show frame	
 		
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	Not needed when part of PuzzleMenu
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Not needed when part of PuzzleMenu
 		frame.setVisible(true);
         
         createWinComp(f + "result" + e);
@@ -72,24 +72,28 @@ public class FifteenGame {
         txt.setFocusable(false);
         JRootPane rootPane = frame.getRootPane();
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "doWest");
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("A"), "doWest");
         rootPane.getActionMap().put("doWest",
         new AbstractAction() {
             public void actionPerformed(ActionEvent e) {westButtonPressed();}
         });
 
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "doEast");
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D"), "doEast");
         rootPane.getActionMap().put("doEast",
         new AbstractAction() {
             public void actionPerformed(ActionEvent e) {eastButtonPressed();}
         });
 
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "doNorth");
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("W"), "doNorth");
         rootPane.getActionMap().put("doNorth",
         new AbstractAction() {
             public void actionPerformed(ActionEvent e) {northButtonPressed();}
         });
 
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "doSouth");
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("S"), "doSouth");
         rootPane.getActionMap().put("doSouth",
         new AbstractAction() {
             public void actionPerformed(ActionEvent e) {southButtonPressed();}
